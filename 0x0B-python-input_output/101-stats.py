@@ -1,18 +1,18 @@
 #!/usr/bin/python3ads from standard input and computes metrics.
 
 """
-After every ten lines or the input of a keyboard interruption (command + C)
-prints statistics
-    - The total file size up to that point
-    -  The Count of read status codes up to that point
+After every ten lines or the input of a keyboard interruption (CTRL + C),
+prints the following statistics:
+    - Total file size up to that point.
+    - Count of read status codes up to that point.
 """
 
 
 def print_stats(size, status_codes):
-    """this prints the accumulated metrics
+    """Print accumulated metrics.
     Args:
-        size (int): accumulated read  file size
-        status_codes (dict): accumulated count of status codes
+        size (int): The accumulated read file size.
+        status_codes (dict): The accumulated count of status codes.
     """
     print("File size: {}".format(size))
     for key in sorted(status_codes):
@@ -20,7 +20,6 @@ def print_stats(size, status_codes):
 
 
 if __name__ == "__main__":
-
     import sys
 
     size = 0
