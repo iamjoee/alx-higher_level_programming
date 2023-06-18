@@ -9,12 +9,8 @@ import sys
 import MySQLdb
 
 if __name__ == "__main__":
-    username = sys.argv[1]
-    password = sys.argv[2]
-    database = sys.argv[3]
-    db = MySQLdb.connect(user=username, passwd=password, db=database)
+    db = MySQLdb.connect(user=sys.argv[1], passwd=sys.argv[2], db=sys.argv[3])
     cursor = db.cursor()
-    query = "SELECT * FROM `states`"
-    cursor.execute(query)
-    for state in cursor.fetchall():
-        print(state)
+    cursor.execute("SELECT * FROM `states`")
+    [print(state) for state in cursor.fetchall()]
+

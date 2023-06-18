@@ -9,21 +9,10 @@ import sys
 import MySQLdb
 
 if __name__ == "__main__":
-    username, password, database = sys.argv[1:4]
-
-    db = MySQLdb.connect(user=username, passwd=password, db=database)
+    db = MySQLdb.connect(user=sys.argv[1], passwd=sys.argv[2], db=sys.argv[3])
     cursor = db.cursor()
-
-    query = """
-    SELECT c.id, c.name, s.name
-    FROM cities AS c
-    INNER JOIN states AS s ON c.state_id = s.id
-    ORDER BY c.id
-    """
-
+    query = "SELECT c.id, c.name, s.name FROM cities as c INNER JOIN states as s ON c.state_id = s.id ORDER BY c.id"
     cursor.execute(query)
-    cities = cursor.fetchall()
-    [print(city) for city in cities]
-
+    [print(city) for city in cursor.fetchall()]
     cursor.close()
     db.close()

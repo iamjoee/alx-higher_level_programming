@@ -12,23 +12,10 @@ import sys
 import MySQLdb
 
 if __name__ == "__main__":
-    username, password, database, state = sys.argv[1:5]
-
-    db = MySQLdb.connect(user=username, passwd=password, db=database)
-    cursor = db.cursor()
-
-    query = """
-    SELECT c.name
-    FROM cities AS c
-    INNER JOIN states AS s ON c.state_id = s.id
-    WHERE s.name = %s
-    ORDER BY c.id
-    """
-
-    cursor.execute(query, (state,))
-    cities = cursor.fetchall()
-    city_names = [city[0] for city in cities]
-    print(", ".join(city_names))
-
-    cursor.close()
-    db.close()
+    db = MySQLdb.connect(user=sys.argv[1], passwd=sys.argv[2], db=sys.argv[3])
+    cs = db.cursor()
+    cs.execute("SELECT * FROM `cities` as `c` \
+                INNER JOIN `states` as `s` \
+                   ON `c`.`state_id` = `s`.`id` \
+                ORDER BY `c`.`id`")
+    print(", ".join([ct[2] for ct in cs.fetchall() if ct[4] == sys.argv[4]]))
