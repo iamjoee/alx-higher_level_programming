@@ -10,8 +10,10 @@ from relationship_state import State, Base
 from relationship_city import City
 
 if __name__ == "__main__":
-    engine = create_engine(f"mysql+mysqldb://{sys.argv[1]}:{sys.argv[2]}@localhost/{sys.argv[3]}",
-                           pool_pre_ping=True)
+    engine = create_engine(
+        f"mysql+mysqldb://{sys.argv[1]}:{sys.argv[2]}@localhost/{sys.argv[3]}",
+        pool_pre_ping=True
+    )
     Base.metadata.create_all(engine)
     Session = sessionmaker(bind=engine)
     session = Session()

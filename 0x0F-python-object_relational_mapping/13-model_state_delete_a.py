@@ -13,8 +13,10 @@ from model_state import State
 
 if __name__ == "__main__":
     username, password, database = sys.argv[1], sys.argv[2], sys.argv[3]
-    engine = create_engine(f"mysql+mysqldb://{username}:{password}@localhost/{database}",
-                           pool_pre_ping=True)
+    engine = create_engine(
+        f"mysql+mysqldb://{username}:{password}@localhost/{database}",
+        pool_pre_ping=True
+    )
     Session = sessionmaker(bind=engine)
     session = Session()
 
